@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom'
 
 import './App.css';
@@ -7,15 +7,19 @@ import IssuesFinder from './containers/IssuesFinder/IssuesFinder';
 import IssueDetails from './containers/IssueDetails/IssueDetails';
 
 
-const App = (props) => (
-  <Fragment>
-    <Layout>
-      <Switch>
-        <Route path="/issue" component={IssueDetails}/>
-        <Route path="/" exact component={IssuesFinder} />
-      </Switch>
-    </Layout>
-  </Fragment>
-);
+class App extends Component {
+  render() {
+    return (
+      <Fragment>
+        <Layout>
+          <Switch>
+            <Route path="/issue" component={IssueDetails} />
+            <Route path="/" exact component={IssuesFinder} />
+          </Switch>
+        </Layout>
+      </Fragment>
+    );
+  }
+}
 
 export default App;
