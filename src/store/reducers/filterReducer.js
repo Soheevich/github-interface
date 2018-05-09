@@ -39,6 +39,7 @@ const filterReducer = (state = initialState, action) => {
     case actionTypes.FETCH_ISSUES_SUCCESS:
       return {
         ...state,
+        issues: action.issues,
         loading: false
       };
     case actionTypes.FETCH_ISSUES_FAIL:
