@@ -28,6 +28,7 @@ class IssuesFinder extends Component {
     const inputs = Object.keys(this.state.inputs).map((inputElement) => {
       return (
         <Input
+          key={inputElement}
           name={inputElement}
           value={this.state.inputs[inputElement]}
           changed={this.onInputChangedHandler} />
@@ -36,7 +37,7 @@ class IssuesFinder extends Component {
     return (
       <div>
         <form onSubmit={this.searchHandler}>
-
+          {inputs}
           <button>Get repos</button>
         </form>
         <ul>

@@ -2,14 +2,15 @@ import React from 'react';
 
 import './Input.css';
 
-const Input = (props) => {
+const Input = ({name, value, changed}) => {
   return (
     <div className="Input">
-      <label className="Label" for={props.name}>{props.name}</label>
+      <label className="Label" htmlFor={name}>{name}</label>
       <input
+        id={name}
         className="InputElement"
-        value={props.value}
-        onChange={(event) => props.changed(event, props.name)} />
+        value={value}
+        onChange={(event) => changed(event, name)} />
     </div>
   );
 };
