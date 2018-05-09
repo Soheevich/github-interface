@@ -1,7 +1,8 @@
-import * as actionsTypes from '../actions/actionTypes';
+import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-  author: null,
+  authorName: null,
+  authorInfo: null,
   repositories: null,
   selectedRepository: null,
   issues: null,
@@ -13,7 +14,7 @@ const filterReducer = (state = initialState, action) => {
     case actionTypes.SELECT_AUTHOR:
       return {
         ...state,
-        author: action.author
+        authorName: action.authorName
       };
     case actionTypes.FETCH_REPOSITORIES_START:
       return {
@@ -24,6 +25,7 @@ const filterReducer = (state = initialState, action) => {
       return {
         ...state,
         repositories: action.repositories,
+        authorInfo: action.authorInfo,
         loading: false
       };
     case actionTypes.FETCH_REPOSITORIES_FAIL:

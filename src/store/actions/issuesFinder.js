@@ -1,10 +1,10 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-orders';
 
-export const selectAuthor = (author) => {
+export const selectAuthor = (authorName) => {
   return {
     type: actionTypes.SELECT_AUTHOR,
-    author
+    authorName
   };
 };
 
@@ -15,10 +15,11 @@ export const selectRepository = (selectedRepository) => {
   };
 };
 
-export const fetchRepositoriesSuccess = (repositories) => {
+export const fetchRepositoriesSuccess = (repositories, authorInfo) => {
   return {
     type: actionTypes.FETCH_REPOSITORIES_SUCCESS,
-    repositories
+    repositories,
+    authorInfo
   };
 };
 
@@ -40,17 +41,18 @@ export const fetchRepositories = (author) => {
     dispatch(fetchRepositoriesStart());
     axios.get(`users/${author}/repos`)
       .then((response) => {
-        dispatch(fetchRepositoriesSuccess(response));
+        let repos = [];
+        Object.keys(response).forEach((repo) => {
+          const {id: id, name: name, owner: owner} = repo;
+          repos.push({id, name});
+        });
+        dispatch(fetchRepositoriesSuccess(repos, owner));
       })
       .catch((error) => {
         dispatch(fetchRepositoriesFail(error));
       });
   };
 };
-
-export const FETCH_REPOSITORIES_START = 'FETCH_REPOSITORIES_START';
-export const FETCH_REPOSITORIES_SUCCESS = 'FETCH_REPOSITORIES_SUCCESS';
-export const FETCH_REPOSITORIES_FAIL = 'FETCH_REPOSITORIES_FAIL';
 
 export const FETCH_ISSUES_START = 'FETCH_ISSUES_START';
 export const FETCH_ISSUES_SUCCESS = 'FETCH_ISSUES_SUCCESS';
