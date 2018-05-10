@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 const IssueDetails = (props) => {
   const { match: { params: { number } } } = props;
   const issue = props.issues.filter((iss) => iss.number === parseInt(number, 10))[0];
-  console.log(issue);
 
   return (
     <div>

@@ -54,6 +54,7 @@ class IssuesFinder extends Component {
         );
       })
     }
+
     return (
       <div>
         <form onSubmit={this.searchHandler}>

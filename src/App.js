@@ -1,5 +1,6 @@
-import React, { Component, Fragment } from 'react';
-import { Route, Switch } from 'react-router-dom'
+import React, { Component } from 'react';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux';
 
 import './App.css';
 import Layout from './components/Layout/Layout';
@@ -10,16 +11,25 @@ import IssueDetails from './containers/IssueDetails/IssueDetails';
 class App extends Component {
   render() {
     return (
-      <Fragment>
-        <Layout>
-          <Switch>
-            <Route path="/issue/:number" component={IssueDetails} />
-            <Route path="/" exact component={IssuesFinder} />
-          </Switch>
-        </Layout>
-      </Fragment>
+      <Layout>
+        <Switch>
+          <Route path="/" exact component={IssuesFinder} />
+          <Route path="/issue/:number" render={() => (
+            this.props.issues ? 
+              (<IssueDetails />) :
+              (<Redirect to="/" />)
+          )} />
+          <Redirect push to="/" />
+        </Switch>
+      </Layout>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    issues: state.issues
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(App));
