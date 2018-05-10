@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import Input from './Input/Input';
 import Issue from '../../components/Issue/Issue';
