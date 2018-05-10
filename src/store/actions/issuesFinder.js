@@ -2,6 +2,13 @@ import * as actionTypes from './actionTypes';
 import axios from '../../axios-orders';
 
 
+export const setInputs = input => {
+  return {
+    type: actionTypes.SET_INPUTS,
+    input
+  };
+};
+
 export const fetchRepositoriesSuccess = repositories => {
   return {
     type: actionTypes.FETCH_REPOSITORIES_SUCCESS,

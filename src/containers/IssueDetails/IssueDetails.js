@@ -6,11 +6,17 @@ import { withRouter } from 'react-router-dom';
 const IssueDetails = (props) => {
   const { match: { params: { number } } } = props;
   const issue = props.issues.filter((iss) => iss.number === parseInt(number, 10))[0];
+  const { user } = issue;
+  console.log(issue);
 
   return (
     <div>
-      <p>Issue details</p>
-      <ReactMarkdown source={issue.body} />;
+      <h3>{issue.title}</h3>
+      <div>
+        <img width="44" height="44" src={user.userAvatarUrl} alt={`@${user.userLogin}` } />
+        <a href={user.userUrl}>{user.userLogin}</a>
+        <ReactMarkdown source={issue.body} />;
+      </div>
     </div>
   );
 };

@@ -4,11 +4,23 @@ const initialState = {
   repositories: null,
   selectedRepository: null,
   issues: null,
-  loading: false
+  loading: false,
+  inputs: {
+    owner: '',
+    repository: ''
+  }
 };
 
 const filterReducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.SET_INPUTS:
+      return {
+        ...state,
+        inputs: {
+          ...state.inputs,
+          ...action.input
+        }
+      };
     case actionTypes.FETCH_REPOSITORIES_START:
       return {
         ...state,
@@ -26,13 +38,11 @@ const filterReducer = (state = initialState, action) => {
         loading: false
       };
     case actionTypes.FETCH_ISSUES_START:
-      // console.log('[FETCH_ISSUES_START] Reducer');
       return {
         ...state,
         loading: true
       };
     case actionTypes.FETCH_ISSUES_SUCCESS:
-      // console.log('[FETCH_ISSUES_SUCCESS] Reducer - action.issues', action.issues);
       return {
         ...state,
         issues: action.issues,

@@ -6,35 +6,22 @@ import Issue from '../../components/Issue/Issue';
 import * as actions from '../../store/actions/issuesFinder';
 
 class IssuesFinder extends Component {
-  state = {
-    inputs: {
-      owner: '',
-      repository: ''
-    }
-  }
-
   searchHandler = (event) => {
     event.preventDefault();
-
-    // console.log('[Issues Finder Container] - searchHandler', this.state.inputs);
-    this.props.onSearchIssues(this.state.inputs.owner, this.state.inputs.repository);
+    this.props.onSearchIssues(this.props.inputs.owner, this.props.inputs.repository);
   }
 
   onInputChangedHandler = (event, inputIdentifier) => {
-    const newInputs = {
-      ...this.state.inputs,
-      [inputIdentifier]: event.target.value
-    };
-    this.setState({ inputs: newInputs });
+    this.props.onInputChange({ [inputIdentifier]: event.target.value })
   }
 
   render() {
-    const inputs = Object.keys(this.state.inputs).map((inputElement) => {
+    const inputs = Object.keys(this.props.inputs).map((inputElement) => {
       return (
         <Input
           key={inputElement}
           name={inputElement}
-          value={this.state.inputs[inputElement]}
+          value={this.props.inputs[inputElement]}
           changed={this.onInputChangedHandler} />
       );
     });
@@ -71,13 +58,15 @@ class IssuesFinder extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    issues: state.issues
+    issues: state.issues,
+    inputs: state.inputs
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSearchIssues: (owner, repository) => dispatch(actions.fetchIssues(owner, repository))
+    onSearchIssues: (owner, repository) => dispatch(actions.fetchIssues(owner, repository)),
+    onInputChange: (object) => dispatch(actions.setInputs(object))
   };
 };
 
