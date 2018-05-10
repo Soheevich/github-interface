@@ -1,28 +1,28 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-orders';
 
-export const selectOwner = (ownerName) => {
+export const selectOwner = ownerName => {
   return {
     type: actionTypes.SELECT_OWNER,
     ownerName
   };
 };
 
-export const selectRepository = (selectedRepository) => {
+export const selectRepository = selectedRepository => {
   return {
     type: actionTypes.SELECT_REPOSITORY,
     selectedRepository
   };
 };
 
-export const fetchRepositoriesSuccess = (repositories) => {
+export const fetchRepositoriesSuccess = repositories => {
   return {
     type: actionTypes.FETCH_REPOSITORIES_SUCCESS,
     repositories
   };
 };
 
-export const fetchRepositoriesFail = (error) => {
+export const fetchRepositoriesFail = error => {
   return {
     type: actionTypes.FETCH_REPOSITORIES_FAIL,
     error
@@ -35,32 +35,33 @@ export const fetchRepositoriesStart = () => {
   };
 };
 
-export const fetchRepositories = (owner) => {
-  return (dispatch) => {
+export const fetchRepositories = owner => {
+  return dispatch => {
     dispatch(fetchRepositoriesStart());
-    axios.get(`users/${owner}/repos`)
-      .then((response) => {
+    axios
+      .get(`users/${owner}/repos`)
+      .then(response => {
         let repos = [];
-        Object.keys(response).forEach((repo) => {
-          const {id, name} = repo;
-          repos.push({id, name});
+        Object.keys(response).forEach(repo => {
+          const { id, name } = repo;
+          repos.push({ id, name });
         });
         dispatch(fetchRepositoriesSuccess(repos));
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch(fetchRepositoriesFail(error));
       });
   };
 };
 
-export const fetchIssuesSuccess = (issues) => {
+export const fetchIssuesSuccess = issues => {
   return {
     type: actionTypes.FETCH_ISSUES_SUCCESS,
     issues
   };
 };
 
-export const fetchIssuesFail = (error) => {
+export const fetchIssuesFail = error => {
   return {
     type: actionTypes.FETCH_ISSUES_FAIL,
     error
@@ -74,18 +75,26 @@ export const fetchIssuesStart = () => {
 };
 
 export const fetchIssues = (owner, repository) => {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(fetchIssuesStart());
-    axios.get(`/repos/${owner}/${repository}/issues`)
-      .then((response) => {
+    axios
+      .get(`/repos/${owner}/${repository}/issues`)
+      .then(response => {
         // console.log('fetchIssuesSuccess - action', response);
         let issues = [];
-        (response.data).forEach((issue) => {
+        response.data.forEach(issue => {
           // console.log('Issues forEach - issue', issue);
-          const { id, title, body, user: {login: userLogin, avatar_url: userAvatarUrl, url: userUrl} } = issue;
+          const {
+            id,
+            title,
+            number,
+            body,
+            user: { login: userLogin, avatar_url: userAvatarUrl, url: userUrl }
+          } = issue;
           issues.push({
             id,
             title,
+            number,
             body,
             user: {
               userLogin,
@@ -96,7 +105,7 @@ export const fetchIssues = (owner, repository) => {
         });
         dispatch(fetchIssuesSuccess(issues));
       })
-      .catch((error) => {
+      .catch(error => {
         // console.log('fetchIssuesFail - action', error);
         dispatch(fetchIssuesFail(error));
       });
