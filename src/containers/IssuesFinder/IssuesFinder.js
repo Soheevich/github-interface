@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Input from '../../components/UI/Input/Input';
+import Input from './Input/Input';
 import * as actions from '../../store/actions/issuesFinder';
 
 class IssuesFinder extends Component {
