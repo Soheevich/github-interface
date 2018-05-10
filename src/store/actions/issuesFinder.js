@@ -70,7 +70,7 @@ export const fetchIssues = (owner, repository) => {
         // console.log('fetchIssuesSuccess - action', response);
         let issues = [];
         response.data.forEach(issue => {
-          // console.log('Issues forEach - issue', issue);
+          console.log('Issues forEach - issue', issue);
           const {
             id,
             title,
@@ -80,7 +80,7 @@ export const fetchIssues = (owner, repository) => {
             user: {
               login: userLogin,
               avatar_url: userAvatarUrl,
-              url: userUrl,
+              html_url: userUrl,
             }
           } = issue;
           issues.push({
