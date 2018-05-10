@@ -58,7 +58,7 @@ class IssuesFinder extends Component {
       <div>
         <form onSubmit={this.searchHandler}>
           {inputs}
-          <button>Get repos</button>
+          <button>Get issues</button>
         </form>
         <ul>
           { issues }
