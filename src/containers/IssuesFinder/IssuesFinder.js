@@ -15,7 +15,7 @@ class IssuesFinder extends Component {
   searchHandler = (event) => {
     event.preventDefault();
 
-    console.log('[Issues Finder Container] - searchHandler', this.state.inputs);
+    // console.log('[Issues Finder Container] - searchHandler', this.state.inputs);
     this.props.onSearchIssues(this.state.inputs.owner, this.state.inputs.repository);
   }
 
@@ -38,7 +38,18 @@ class IssuesFinder extends Component {
       );
     });
 
-    console.log(this.props.issues)
+    let issues = null;
+    if (this.props.issues) {
+      issues = this.props.issues.map((issue) => {
+        return (
+          <li key={issue.id}>
+            <h2>{issue.title}</h2>
+            <h3>{issue.userLogin}</h3>
+            {issue.body}
+          </li>
+        );
+      })
+    }
     return (
       <div>
         <form onSubmit={this.searchHandler}>
@@ -46,7 +57,7 @@ class IssuesFinder extends Component {
           <button>Get repos</button>
         </form>
         <ul>
-          
+          { issues }
         </ul>
       </div>
     );

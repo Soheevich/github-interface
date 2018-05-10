@@ -78,14 +78,15 @@ export const fetchIssues = (owner, repository) => {
     dispatch(fetchIssuesStart());
     axios.get(`/repos/${owner}/${repository}/issues`)
       .then((response) => {
-        console.log('fetchIssuesSuccess - action', response);
+        // console.log('fetchIssuesSuccess - action', response);
         let issues = [];
         (response.data).forEach((issue) => {
-          console.log('Issues forEach - issue', issue);
-          const { id, title, user: {login: userLogin, avatar_url: userAvatarUrl, url: userUrl} } = issue;
+          // console.log('Issues forEach - issue', issue);
+          const { id, title, body, user: {login: userLogin, avatar_url: userAvatarUrl, url: userUrl} } = issue;
           issues.push({
             id,
             title,
+            body,
             user: {
               userLogin,
               userAvatarUrl,
@@ -96,7 +97,7 @@ export const fetchIssues = (owner, repository) => {
         dispatch(fetchIssuesSuccess(issues));
       })
       .catch((error) => {
-        console.log('fetchIssuesFail - action', error);
+        // console.log('fetchIssuesFail - action', error);
         dispatch(fetchIssuesFail(error));
       });
   };

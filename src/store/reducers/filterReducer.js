@@ -34,13 +34,13 @@ const filterReducer = (state = initialState, action) => {
         loading: false
       };
     case actionTypes.FETCH_ISSUES_START:
-      console.log('[FETCH_ISSUES_START] Reducer');
+      // console.log('[FETCH_ISSUES_START] Reducer');
       return {
         ...state,
         loading: true
       };
     case actionTypes.FETCH_ISSUES_SUCCESS:
-      console.log('[FETCH_ISSUES_SUCCESS] Reducer - action.issues', action.issues);
+      // console.log('[FETCH_ISSUES_SUCCESS] Reducer - action.issues', action.issues);
       return {
         ...state,
         issues: action.issues,
