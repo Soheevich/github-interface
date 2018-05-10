@@ -48,10 +48,11 @@ export const fetchRepositories = owner => {
   };
 };
 
-export const fetchIssuesSuccess = issues => {
+export const fetchIssuesSuccess = (issues, list) => {
   return {
     type: actionTypes.FETCH_ISSUES_SUCCESS,
-    issues
+    issues,
+    list
   };
 };
 
@@ -68,14 +69,21 @@ export const fetchIssuesStart = () => {
   };
 };
 
-export const fetchIssues = (owner, repository, perPage = 20) => {
+export const fetchIssues = (owner, repository, page = 1, perPage = 20) => {
   return dispatch => {
     dispatch(fetchIssuesStart());
     axios
-      .get(`/repos/${owner}/${repository}/issues?page=1&per_page=${perPage}`)
+      .get(`/repos/${owner}/${repository}/issues?page=${page}&per_page=${perPage}`)
       .then(response => {
-        // console.log('fetchIssuesSuccess - action', response);
+        console.log('fetchIssuesSuccess - action', response);
         let issues = [];
+        const { headers: { link: headerLink } } = response;
+        const totalPages = headerLink.match(/\d+(?=&per_page=20>; rel="last")/)[0];
+        const list = {
+          currentPage: 1,
+            totalPages: parseInt(totalPages)
+        };
+
         response.data.forEach(issue => {
           // console.log('Issues forEach - issue', issue);
           const {
@@ -90,6 +98,7 @@ export const fetchIssues = (owner, repository, perPage = 20) => {
               html_url: userUrl,
             }
           } = issue;
+
           issues.push({
             id,
             title,
@@ -103,7 +112,7 @@ export const fetchIssues = (owner, repository, perPage = 20) => {
             }
           });
         });
-        dispatch(fetchIssuesSuccess(issues));
+        dispatch(fetchIssuesSuccess(issues, list));
       })
       .catch(error => {
         // console.log('fetchIssuesFail - action', error);

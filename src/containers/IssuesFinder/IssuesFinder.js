@@ -45,6 +45,11 @@ class IssuesFinder extends Component {
 
     const buttonActive = this.props.inputs.owner && this.props.inputs.repository;
 
+    const numberOfPages = this.props.list ?
+      <p>page #{this.props.list.currentPage}, total number of pages: {this.props.list.totalPages}</p>:
+      null;
+    console.log(this.props);
+
     return (
       <div className="IssuesMain">
         <form onSubmit={this.searchHandler} className="IssuesForm">
@@ -54,6 +59,7 @@ class IssuesFinder extends Component {
         <ul className="IssuesList">
           { issues }
         </ul>
+        {numberOfPages}
       </div>
     );
   };
@@ -62,7 +68,8 @@ class IssuesFinder extends Component {
 const mapStateToProps = (state) => {
   return {
     issues: state.issues,
-    inputs: state.inputs
+    inputs: state.inputs,
+    list: state.list
   };
 };
 

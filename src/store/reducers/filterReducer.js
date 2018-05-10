@@ -8,7 +8,8 @@ const initialState = {
   inputs: {
     owner: '',
     repository: ''
-  }
+  },
+  list: null
 };
 
 const filterReducer = (state = initialState, action) => {
@@ -43,9 +44,11 @@ const filterReducer = (state = initialState, action) => {
         loading: true
       };
     case actionTypes.FETCH_ISSUES_SUCCESS:
+      console.log('issues', action.issues);
       return {
         ...state,
         issues: action.issues,
+        list: action.list,
         loading: false
       };
     case actionTypes.FETCH_ISSUES_FAIL:
