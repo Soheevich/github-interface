@@ -1,19 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-orders';
 
-export const selectOwner = ownerName => {
-  return {
-    type: actionTypes.SELECT_OWNER,
-    ownerName
-  };
-};
-
-export const selectRepository = selectedRepository => {
-  return {
-    type: actionTypes.SELECT_REPOSITORY,
-    selectedRepository
-  };
-};
 
 export const fetchRepositoriesSuccess = repositories => {
   return {

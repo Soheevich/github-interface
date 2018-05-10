@@ -1,8 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-  ownerName: null,
-  ownerInfo: null,
   repositories: null,
   selectedRepository: null,
   issues: null,
@@ -11,11 +9,6 @@ const initialState = {
 
 const filterReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SELECT_OWNER:
-      return {
-        ...state,
-        ownerName: action.ownerName
-      };
     case actionTypes.FETCH_REPOSITORIES_START:
       return {
         ...state,
@@ -25,7 +18,6 @@ const filterReducer = (state = initialState, action) => {
       return {
         ...state,
         repositories: action.repositories,
-        ownerInfo: action.ownerInfo,
         loading: false
       };
     case actionTypes.FETCH_REPOSITORIES_FAIL:
