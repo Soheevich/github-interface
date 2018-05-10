@@ -42,13 +42,14 @@ class IssuesFinder extends Component {
     let issues = null;
     if (this.props.issues) {
       issues = this.props.issues.map((issue) => {
-        console.log('issue', issue);
+        // console.log('issue', issue);
         return (
           <li key={issue.id}>
             <Issue
               title={issue.title}
               user={issue.user}
-              body={issue.body} />
+              createdAt={issue.createdAt}
+              number={issue.number} />
           </li>
         );
       })

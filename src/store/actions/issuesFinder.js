@@ -65,7 +65,7 @@ export const fetchIssues = (owner, repository) => {
   return dispatch => {
     dispatch(fetchIssuesStart());
     axios
-      .get(`/repos/${owner}/${repository}/issues`)
+      .get(`/repos/${owner}/${repository}/issues?page=1&per_page=10`)
       .then(response => {
         // console.log('fetchIssuesSuccess - action', response);
         let issues = [];
@@ -76,13 +76,19 @@ export const fetchIssues = (owner, repository) => {
             title,
             number,
             body,
-            user: { login: userLogin, avatar_url: userAvatarUrl, url: userUrl }
+            created_at: createdAt,
+            user: {
+              login: userLogin,
+              avatar_url: userAvatarUrl,
+              url: userUrl,
+            }
           } = issue;
           issues.push({
             id,
             title,
             number,
             body,
+            createdAt,
             user: {
               userLogin,
               userAvatarUrl,
