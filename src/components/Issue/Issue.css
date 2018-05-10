@@ -1,0 +1,29 @@
+.IssueLink {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  color: #24292e;
+}
+
+.IssueLink:hover,
+.IssueLink:active {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.IssueText {
+  font-size: 12px;
+  margin-top: 4px;
+  color: #586069;
+}
+
+.IssueText a,
+.IssueText a:visited {
+  color: #586069;
+  text-decoration: none;
+}
+
+.IssueText a:hover {
+  color: #0366d6;
+  text-decoration: none;
+}

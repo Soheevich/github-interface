@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import dateDifference from '../../helpers/dateDifference';
+import './Issue.css';
 
 const Issue = props => {
   let { createdAt } = props;
@@ -12,8 +13,8 @@ const Issue = props => {
 
   return (
     <Fragment>
-      <Link to={`/issue/${props.number}`}>{props.title}</Link>
-      <p>
+      <Link className="IssueLink" to={`/issue/${props.number}`}>{props.title}</Link>
+      <p className="IssueText">
         #{props.number} opened <span title={createdAt.toLocaleString('ru-RU')}>{diffTime} {diffTitle}</span> ago by <a href={props.user.userUrl}>
           {props.user.userLogin}
         </a>
