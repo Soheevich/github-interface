@@ -13,7 +13,7 @@ class App extends Component {
       <Fragment>
         <Layout>
           <Switch>
-            <Route path="/issue" component={IssueDetails} />
+            <Route path="/issue/:number" component={IssueDetails} />
             <Route path="/" exact component={IssuesFinder} />
           </Switch>
         </Layout>

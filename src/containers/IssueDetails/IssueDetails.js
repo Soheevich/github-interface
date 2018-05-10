@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-
+//<ReactMarkdown source={props.body} />
 
 const IssueDetails = props => (
   <div>
-    <ReactMarkdown source={props.body} />
+    <p>Issue details</p>
   </div>
 );
 

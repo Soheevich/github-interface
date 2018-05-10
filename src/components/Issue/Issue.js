@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
 import dateDifference from '../../helpers/dateDifference';
 
@@ -9,14 +10,15 @@ const Issue = props => {
 
   const { diffTime, diffTitle } = dateDifference(createdAt, currentDate);
 
-  return <Fragment>
-      <h3>{props.title}</h3>
+  return (
+    <Fragment>
+      <Link to={`/issue/${props.number}`}>{props.title}</Link>
       <p>
         #{props.number} opened <span title={createdAt.toLocaleString('ru-RU')}>{diffTime} {diffTitle}</span> ago by <a href={props.user.userUrl}>
           {props.user.userLogin}
         </a>
       </p>
-    </Fragment>;
+    </Fragment>);
 };
 
 export default Issue;
