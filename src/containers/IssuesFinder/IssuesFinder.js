@@ -43,9 +43,7 @@ class IssuesFinder extends Component {
       issues = this.props.issues.map((issue) => {
         return (
           <li key={issue.id}>
-            <h2>{issue.title}</h2>
-            <h3>{issue.userLogin}</h3>
-            {issue.body}
+            
           </li>
         );
       })
