@@ -32,7 +32,7 @@ class IssuesFinder extends Component {
       issues = this.props.issues.map((issue) => {
         // console.log('issue', issue);
         return (
-          <li key={issue.id}>
+          <li key={issue.id} className="IssuesListElement">
             <Issue
               title={issue.title}
               user={issue.user}
