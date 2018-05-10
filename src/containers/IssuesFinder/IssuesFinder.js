@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Input from './Input/Input';
 import Issue from '../../components/Issue/Issue';
 import * as actions from '../../store/actions/issuesFinder';
+import './IssuesFinder.css';
 
 class IssuesFinder extends Component {
   searchHandler = (event) => {
@@ -43,12 +44,12 @@ class IssuesFinder extends Component {
     }
 
     return (
-      <div>
-        <form onSubmit={this.searchHandler}>
+      <div className="IssuesMain">
+        <form onSubmit={this.searchHandler} className="IssuesForm">
           {inputs}
           <button>Get issues</button>
         </form>
-        <ul>
+        <ul className="IssuesList">
           { issues }
         </ul>
       </div>
