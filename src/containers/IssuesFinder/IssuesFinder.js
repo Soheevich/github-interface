@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Input from '../../components/UI/Input/Input';
+import * as actions from '../../store/actions/issuesFinder';
 
 class IssuesFinder extends Component {
   state = {
     inputs: {
-      author: '',
+      owner: '',
       repository: ''
     }
   }
@@ -13,7 +15,8 @@ class IssuesFinder extends Component {
   searchHandler = (event) => {
     event.preventDefault();
 
-    this.props.onSearchIssues(this.state.author, this.state.repository);
+    console.log('[Issues Finder Container] - searchHandler', this.state.inputs);
+    this.props.onSearchIssues(this.state.inputs.owner, this.state.inputs.repository);
   }
 
   onInputChangedHandler = (event, inputIdentifier) => {
@@ -34,6 +37,8 @@ class IssuesFinder extends Component {
           changed={this.onInputChangedHandler} />
       );
     });
+
+    console.log(this.props.issues)
     return (
       <div>
         <form onSubmit={this.searchHandler}>
@@ -50,8 +55,14 @@ class IssuesFinder extends Component {
 
 const mapStateToProps = (state) => {
   return {
-
+    issues: state.issues
   };
 };
 
-export default IssuesFinder;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSearchIssues: (owner, repository) => dispatch(actions.fetchIssues(owner, repository))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(IssuesFinder);

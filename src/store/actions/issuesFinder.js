@@ -1,10 +1,10 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-orders';
 
-export const selectAuthor = (authorName) => {
+export const selectOwner = (ownerName) => {
   return {
-    type: actionTypes.SELECT_AUTHOR,
-    authorName
+    type: actionTypes.SELECT_OWNER,
+    ownerName
   };
 };
 
@@ -15,11 +15,10 @@ export const selectRepository = (selectedRepository) => {
   };
 };
 
-export const fetchRepositoriesSuccess = (repositories, authorInfo) => {
+export const fetchRepositoriesSuccess = (repositories) => {
   return {
     type: actionTypes.FETCH_REPOSITORIES_SUCCESS,
-    repositories,
-    authorInfo
+    repositories
   };
 };
 
@@ -36,17 +35,17 @@ export const fetchRepositoriesStart = () => {
   };
 };
 
-export const fetchRepositories = (author) => {
+export const fetchRepositories = (owner) => {
   return (dispatch) => {
     dispatch(fetchRepositoriesStart());
-    axios.get(`users/${author}/repos`)
+    axios.get(`users/${owner}/repos`)
       .then((response) => {
         let repos = [];
         Object.keys(response).forEach((repo) => {
-          const {id: id, name: name, owner: owner} = repo;
+          const {id, name} = repo;
           repos.push({id, name});
         });
-        dispatch(fetchRepositoriesSuccess(repos, owner));
+        dispatch(fetchRepositoriesSuccess(repos));
       })
       .catch((error) => {
         dispatch(fetchRepositoriesFail(error));
@@ -54,6 +53,51 @@ export const fetchRepositories = (author) => {
   };
 };
 
-export const FETCH_ISSUES_START = 'FETCH_ISSUES_START';
-export const FETCH_ISSUES_SUCCESS = 'FETCH_ISSUES_SUCCESS';
-export const FETCH_ISSUES_FAIL = 'FETCH_ISSUES_FAIL';
+export const fetchIssuesSuccess = (issues) => {
+  return {
+    type: actionTypes.FETCH_ISSUES_SUCCESS,
+    issues
+  };
+};
+
+export const fetchIssuesFail = (error) => {
+  return {
+    type: actionTypes.FETCH_ISSUES_FAIL,
+    error
+  };
+};
+
+export const fetchIssuesStart = () => {
+  return {
+    type: actionTypes.FETCH_ISSUES_START
+  };
+};
+
+export const fetchIssues = (owner, repository) => {
+  return (dispatch) => {
+    dispatch(fetchIssuesStart());
+    axios.get(`/repos/${owner}/${repository}/issues`)
+      .then((response) => {
+        console.log('fetchIssuesSuccess - action', response);
+        let issues = [];
+        (response.data).forEach((issue) => {
+          console.log('Issues forEach - issue', issue);
+          const { id, title, user: {login: userLogin, avatar_url: userAvatarUrl, url: userUrl} } = issue;
+          issues.push({
+            id,
+            title,
+            user: {
+              userLogin,
+              userAvatarUrl,
+              userUrl
+            }
+          });
+        });
+        dispatch(fetchIssuesSuccess(issues));
+      })
+      .catch((error) => {
+        console.log('fetchIssuesFail - action', error);
+        dispatch(fetchIssuesFail(error));
+      });
+  };
+};
