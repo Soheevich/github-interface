@@ -43,11 +43,13 @@ class IssuesFinder extends Component {
       })
     }
 
+    const buttonActive = this.props.inputs.owner && this.props.inputs.repository;
+
     return (
       <div className="IssuesMain">
         <form onSubmit={this.searchHandler} className="IssuesForm">
           {inputs}
-          <button>Get issues</button>
+          <button disabled={!buttonActive}>Get issues</button>
         </form>
         <ul className="IssuesList">
           { issues }
