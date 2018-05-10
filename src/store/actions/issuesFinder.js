@@ -75,13 +75,13 @@ export const fetchIssues = (owner, repository, page = 1, perPage = 20) => {
     axios
       .get(`/repos/${owner}/${repository}/issues?page=${page}&per_page=${perPage}`)
       .then(response => {
-        console.log('fetchIssuesSuccess - action', response);
+        // console.log('fetchIssuesSuccess - action', response);
         let issues = [];
         const { headers: { link: headerLink } } = response;
         const totalPages = headerLink.match(/\d+(?=&per_page=20>; rel="last")/)[0];
         const list = {
           currentPage: 1,
-            totalPages: parseInt(totalPages)
+          totalPages: parseInt(totalPages, 10)
         };
 
         response.data.forEach(issue => {

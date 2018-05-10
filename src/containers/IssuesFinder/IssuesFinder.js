@@ -9,7 +9,7 @@ import './IssuesFinder.css';
 class IssuesFinder extends Component {
   searchHandler = (event) => {
     event.preventDefault();
-    this.props.onSearchIssues(this.props.inputs.owner, this.props.inputs.repository);
+    this.props.onSearchIssues(this.props.inputs.owner, this.props.inputs.repository, this.props.list.currentPage, this.props.inputs.issuesPerPage);
   }
 
   onInputChangedHandler = (event, inputIdentifier) => {
@@ -48,7 +48,6 @@ class IssuesFinder extends Component {
     const numberOfPages = this.props.list ?
       <p>page #{this.props.list.currentPage}, total number of pages: {this.props.list.totalPages}</p>:
       null;
-    console.log(this.props);
 
     return (
       <div className="IssuesMain">
@@ -75,8 +74,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSearchIssues: (owner, repository) => dispatch(actions.fetchIssues(owner, repository)),
-    onInputChange: (object) => dispatch(actions.setInputs(object))
+    onSearchIssues: (owner, repository, page, numberOfIssues) =>
+      dispatch(actions.fetchIssues(owner, repository, page, numberOfIssues)),
+    onInputChange: (object) =>
+      dispatch(actions.setInputs(object))
   };
 };
 

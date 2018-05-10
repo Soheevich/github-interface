@@ -7,9 +7,13 @@ const initialState = {
   loading: false,
   inputs: {
     owner: '',
-    repository: ''
+    repository: '',
+    issuesPerPage: 20
   },
-  list: null
+  list: {
+    currentPage: 1,
+    totalPages: null
+  }
 };
 
 const filterReducer = (state = initialState, action) => {
