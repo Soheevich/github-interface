@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 const IssueDetails = (props) => {
   const { match: { params: { number } } } = props;
@@ -20,4 +21,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(IssueDetails);
+export default withRouter(connect(mapStateToProps)(IssueDetails));
