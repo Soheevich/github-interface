@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 
 import './Pagination.css';
-import * as actions from '../../../../store/actions/issuesFinder';
 
-class Pagination extends Component {
-  pageChangeHandler = (page) => {
+const Pagination = (props) => {
+  const pageChangeHandler = (page) => {
     const issuesPerPage = parseInt(this.props.inputs.issuesPerPage.value, 10);
 
     this.props.onPageNumberChange(this.props.inputs.owner.value, this.props.inputs.repository.value, page, issuesPerPage);
   }
 
-  makePages = () => {
+  const makePages = () => {
     console.log('make pages', this.props.list);
     const { currentPage, totalPages } = this.props.list;
     let pages = [];
@@ -63,27 +61,11 @@ class Pagination extends Component {
     return pages;
   }
 
-  render() {
     return (
       <div className="Pagination">
         {this.makePages()}
       </div>
     );
-  }
 };
 
-const mapStateToProps = (state) => {
-  return {
-    inputs: state.inputs,
-    list: state.list
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onPageNumberChange: (owner, repository, page, numberOfIssues) =>
-      dispatch(actions.setPage(owner, repository, page, numberOfIssues)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Pagination);
+export default Pagination;

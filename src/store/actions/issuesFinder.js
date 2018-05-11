@@ -9,12 +9,12 @@ export const setInputs = input => {
   };
 };
 
-export const setPage = (owner, repository, page, perPage) => {
-  return dispatch => {
-    dispatch(setCurrentPage(page));
-    dispatch(fetchIssues(owner, repository, page, perPage));
-  };
-};
+// export const setPage = (owner, repository, page, perPage) => {
+//   return dispatch => {
+//     dispatch(setCurrentPage(page));
+//     dispatch(fetchIssues(owner, repository, page, perPage));
+//   };
+// };
 
 export const setCurrentPage = page => {
   return {
