@@ -1,0 +1,35 @@
+.Pagination {
+  display: flex;
+  margin: 10px auto;
+}
+
+.PaginationButton {
+  position: relative;
+  padding: 7px 12px;
+  margin-left: -1px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  color: #0366d6;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background: #fff;
+  border: 1px solid #eee;
+}
+
+.PaginationButton:hover,
+.PaginationButton:active {
+  background-color: #eff;
+  border-color: #eee;
+}
+
+.PreviousPage {
+}
+
+.NextPage {
+}
+
+.Disabled {
+}
