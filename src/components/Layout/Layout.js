@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 
-const Layout = (props) => (
-  <div>
-    <p>Header</p>
-    { props.children }
-  </div>
+import './Layout.css';
+
+const Layout = props => (
+  <Fragment>
+    <header className="Header">
+      <Link to="/">Github Interface</Link>
+    </header>
+    {props.children}
+  </Fragment>
 );
 
 export default Layout;

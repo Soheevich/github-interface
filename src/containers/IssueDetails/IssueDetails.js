@@ -10,16 +10,15 @@ const IssueDetails = (props) => {
   const issue = props.issues.filter((iss) => iss.number === parseInt(number, 10))[0];
   const { user } = issue;
   const text = marked(issue.body);
-  console.log(text);
 
   return (
     <div className="IssuesDetailsMain">
-      <h3>{issue.title}</h3>
-      <div>
+      <article>
+        <h3>{issue.title}</h3>
         <img width="44" height="44" src={user.userAvatarUrl} alt={`@${user.userLogin}` } />
         <a href={user.userUrl}>{user.userLogin}</a>
-        <article dangerouslySetInnerHTML={{ __html: text }}></article>
-      </div>
+        <section dangerouslySetInnerHTML={{ __html: text }}></section>
+      </article>
     </div>
   );
 };
