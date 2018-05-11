@@ -27,7 +27,12 @@ class IssuesFinder extends Component {
           onSearch={this.searchHandler}
           onInputChange={this.onInputChangedHandler} />
         <ErrorBoundary>
-          <Issues />
+          <Issues 
+            issues={this.props.issues}
+            list={this.props.list}
+            loading={this.props.loading}
+            error={this.props.error}
+            pageChange={this.props.onPageNumberChange} />
         </ErrorBoundary>
       </div>
     );

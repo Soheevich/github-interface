@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { connect } from 'react-redux';
 
 import './Issues.css';
 import Issue from './Issue/Issue';
@@ -16,7 +15,9 @@ const Issues = (props) => {
   } else if (props.error) {
     throw props.error;
   } else if (props.issues) {
-    pagination = <Pagination />;
+    pagination = <Pagination
+      list={props.list}
+      pageChange={props.pageChange} />;
 
     issues = props.issues.map((issue) => {
       // console.log('issue', issue);
@@ -42,12 +43,4 @@ const Issues = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    issues: state.issues,
-    loading: state.loading,
-    error: state.error
-  };
-};
-
-export default connect(mapStateToProps)(Issues);
+export default Issues;
