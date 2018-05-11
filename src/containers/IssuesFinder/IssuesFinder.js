@@ -34,7 +34,8 @@ class IssuesFinder extends Component {
           return (
             <Input
               key={formElement.id}
-              name={formElement.id}
+              id={formElement.id}
+              name={formElement.config.name}
               elementType={formElement.config.elementType}
               elementConfig={formElement.config.elementConfig}
               value={formElement.config.value}

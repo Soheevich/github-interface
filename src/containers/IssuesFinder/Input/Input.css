@@ -1,7 +1,7 @@
 .Input {
   width: 100%;
-  padding: 10px;
   box-sizing: border-box;
+  margin: 20px 0;
 }
 
 .Label {
@@ -23,5 +23,5 @@
 
 .InputElement:focus {
   outline: none;
-  background-color: #ccc;
+  background-color: #eee;
 }

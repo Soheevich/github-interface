@@ -9,20 +9,20 @@ const Input = (props) => {
     case ('input'):
       inputElement =
         <input
-          id={props.name}
+          id={props.id}
           className="InputElement"
           {...props.elementConfig}
           value={props.value}
-          onChange={(event) => props.changed(event, props.name)} />;
+          onChange={(event) => props.changed(event, props.id)} />;
       break;
     case ('select'):
       inputElement = (
         <select
-          id={props.name}
+          id={props.id}
           className="InputElement"
           {...props.elementConfig}
           value={props.value}
-          onChange={(event) => props.changed(event, props.name)}>
+          onChange={(event) => props.changed(event, props.id)}>
           {props.elementConfig.options.map(option => (
             <option key={option.value} value={option.value}>
               {option.displayValue}
@@ -34,16 +34,16 @@ const Input = (props) => {
     default:
       inputElement =
         <input
-          id={props.name}
+          id={props.id}
           className="InputElement"
           {...props.elementConfig}
           value={props.value}
-          onChange={(event) => props.changed(event, props.name)} />;
+          onChange={(event) => props.changed(event, props.id)} />;
   }
 
   return (
     <div className="Input">
-      <label className="Label" htmlFor={props.name}>{props.name}</label>
+      <label className="Label" htmlFor={props.id}>{props.name}</label>
       { inputElement }
     </div>
   );

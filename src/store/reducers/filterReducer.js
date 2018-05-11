@@ -7,22 +7,25 @@ const initialState = {
   loading: false,
   inputs: {
     owner: {
+      name: 'Owner',
       elementType: 'input',
       elementConfig: {
         type: 'text',
         placeholder: 'Owner'
       },
-      value: '',
+      value: ''
     },
     repository: {
+      name: 'Repository',
       elementType: 'input',
       elementConfig: {
         type: 'text',
         placeholder: 'Repository'
       },
-      value: '',
+      value: ''
     },
     issuesPerPage: {
+      name: 'Issues per Page',
       elementType: 'select',
       elementConfig: {
         options: [
@@ -31,7 +34,7 @@ const initialState = {
           { value: 40, displayValue: '40' }
         ]
       },
-      value: 20,
+      value: 20
     }
   },
   list: {
