@@ -9,19 +9,12 @@ export const setInputs = input => {
   };
 };
 
-// export const setPage = (owner, repository, page, perPage) => {
-//   return dispatch => {
-//     dispatch(setCurrentPage(page));
-//     dispatch(fetchIssues(owner, repository, page, perPage));
+// export const setCurrentPage = page => {
+//   return {
+//     type: actionTypes.SET_CURRENT_PAGE,
+//     page
 //   };
 // };
-
-export const setCurrentPage = page => {
-  return {
-    type: actionTypes.SET_CURRENT_PAGE,
-    page
-  };
-};
 
 export const fetchRepositoriesSuccess = repositories => {
   return {
@@ -62,11 +55,12 @@ export const fetchRepositories = owner => {
   };
 };
 
-export const fetchIssuesSuccess = (issues, list) => {
+export const fetchIssuesSuccess = (issues, list, page) => {
   return {
     type: actionTypes.FETCH_ISSUES_SUCCESS,
     issues,
-    list
+    list,
+    page
   };
 };
 
@@ -83,7 +77,7 @@ export const fetchIssuesStart = () => {
   };
 };
 
-export const fetchIssues = (owner, repository, page = 1, perPage = 20) => {
+export const fetchIssues = (owner, repository, page, perPage) => {
   return dispatch => {
     dispatch(fetchIssuesStart());
     axios
@@ -126,7 +120,7 @@ export const fetchIssues = (owner, repository, page = 1, perPage = 20) => {
             }
           });
         });
-        dispatch(fetchIssuesSuccess(issues, list));
+        dispatch(fetchIssuesSuccess(issues, list, page));
       })
       .catch(error => {
         // console.log('fetchIssuesFail - action', error);

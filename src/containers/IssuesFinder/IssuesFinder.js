@@ -5,13 +5,16 @@ import './IssuesFinder.css';
 import * as actions from '../../store/actions/issuesFinder';
 import Form from './Form/Form';
 import Issues from './Issues/Issues';
+import Pagination from './Pagination/Pagination';
 import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 
 
 class IssuesFinder extends Component {
-  searchHandler = (event) => {
+  onSearchHandler = (event) => {
     event.preventDefault();
     const issuesPerPage = parseInt(this.props.inputs.issuesPerPage.value, 10);
+
+    // this method takes current page from the store
     this.props.onSearchIssues(this.props.inputs.owner.value, this.props.inputs.repository.value, this.props.list.currentPage, issuesPerPage);
   }
 
@@ -19,20 +22,35 @@ class IssuesFinder extends Component {
     this.props.onInputChange({ [inputIdentifier]: { value: event.target.value } });
   }
 
+  onChangePageHandler = (page) => {
+    const issuesPerPage = parseInt(this.props.inputs.issuesPerPage.value, 10);
+
+    // this method takes current page from clicked element, it rewrites store's current page
+    this.props.onSearchIssues(this.props.inputs.owner.value, this.props.inputs.repository.value, page, issuesPerPage);
+  }
+
   render() {
+    let pagination = null;
+
+    if (this.props.issues && !this.props.loading) {
+    pagination = <Pagination
+      list={this.props.list}
+      pageChange={this.onChangePageHandler} />;
+    }
+
     return (
       <div className="IssuesMain">
         <Form 
           inputs={this.props.inputs}
-          onSearch={this.searchHandler}
+          onSearch={this.onSearchHandler}
           onInputChange={this.onInputChangedHandler} />
         <ErrorBoundary>
           <Issues 
             issues={this.props.issues}
             list={this.props.list}
             loading={this.props.loading}
-            error={this.props.error}
-            pageChange={this.props.onPageNumberChange} />
+            error={this.props.error} />
+          {pagination}
         </ErrorBoundary>
       </div>
     );
@@ -55,8 +73,6 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actions.fetchIssues(owner, repository, page, numberOfIssues)),
     onInputChange: (object) =>
       dispatch(actions.setInputs(object)),
-    onPageNumberChange: (owner, repository, page, numberOfIssues) =>
-      dispatch(actions.setCurrentPage(page)),
   };
 };
 

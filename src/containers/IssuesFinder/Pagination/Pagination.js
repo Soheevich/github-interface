@@ -3,7 +3,7 @@ import React from 'react';
 import './Pagination.css';
 
 const Pagination = (props) => {
-  console.log('make pages', props.list);
+  // console.log('make pages', props.list);
   const { currentPage, totalPages } = props.list;
   let pages = [];
 
@@ -41,7 +41,7 @@ const Pagination = (props) => {
       </span>
     );
   });
-  console.log(mainPages);
+  // console.log(mainPages);
 
   pages = pages.concat(mainPages);
   pages.push(<span

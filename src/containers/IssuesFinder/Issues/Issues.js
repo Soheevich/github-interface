@@ -1,24 +1,18 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import './Issues.css';
 import Issue from './Issue/Issue';
 import Spinner from '../../../components/Spinner/Spinner';
-import Pagination from './Pagination/Pagination';
 
 
 const Issues = (props) => {
   let issues = null;
-  let pagination = null;
 
   if (props.loading) {
     issues = <Spinner />
   } else if (props.error) {
     throw props.error;
   } else if (props.issues) {
-    pagination = <Pagination
-      list={props.list}
-      pageChange={props.pageChange} />;
-
     issues = props.issues.map((issue) => {
       // console.log('issue', issue);
       return (
@@ -34,12 +28,9 @@ const Issues = (props) => {
   }
 
   return (
-    <Fragment>
-      <ul className="IssuesList">
-        {issues}
-      </ul>
-      {pagination}
-    </Fragment>
+    <ul className="IssuesList">
+      {issues}
+    </ul>
   );
 };
 
