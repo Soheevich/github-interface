@@ -10,8 +10,6 @@ const Issues = (props) => {
 
   if (props.loading) {
     issues = <Spinner />
-  } else if (props.error) {
-    throw props.error;
   } else if (props.issues) {
     issues = props.issues.map((issue) => {
       // console.log('issue', issue);

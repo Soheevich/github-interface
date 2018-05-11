@@ -44,7 +44,7 @@ class IssuesFinder extends Component {
           inputs={this.props.inputs}
           onSearch={this.onSearchHandler}
           onInputChange={this.onInputChangedHandler} />
-        <ErrorBoundary>
+        <ErrorBoundary error={this.props.error}>
           <Issues 
             issues={this.props.issues}
             list={this.props.list}
