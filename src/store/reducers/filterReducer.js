@@ -5,6 +5,7 @@ const initialState = {
   selectedRepository: null,
   issues: null,
   loading: false,
+  error: false,
   inputs: {
     owner: {
       name: 'Owner',
@@ -78,7 +79,8 @@ const filterReducer = (state = initialState, action) => {
     case actionTypes.FETCH_ISSUES_START:
       return {
         ...state,
-        loading: true
+        loading: true,
+        error: false
       };
     case actionTypes.FETCH_ISSUES_SUCCESS:
       // console.log('issues', action.issues);
@@ -91,7 +93,8 @@ const filterReducer = (state = initialState, action) => {
     case actionTypes.FETCH_ISSUES_FAIL:
       return {
         ...state,
-        loading: false
+        loading: false,
+        error: action.error
       };
     default:
       return {

@@ -9,6 +9,8 @@ const Issues = (props) => {
   let issues = null;
   if (props.loading) {
     issues = <Spinner />
+  } else if (props.error) {
+    throw props.error;
   } else if (props.issues) {
     issues = props.issues.map((issue) => {
       // console.log('issue', issue);
@@ -35,6 +37,7 @@ const mapStateToProps = (state) => {
   return {
     issues: state.issues,
     loading: state.loading,
+    error: state.error
   };
 };
 

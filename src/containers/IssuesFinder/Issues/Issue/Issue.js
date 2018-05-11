@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import dateDifference from '../../../../helpers/dateDifference';
 import './Issue.css';
 
-const Issue = props => {
+const Issue = (props) => {
   let { createdAt } = props;
   createdAt = new Date(createdAt);
   const currentDate = new Date();
