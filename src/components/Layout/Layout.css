@@ -1,3 +1,7 @@
+.Content {
+  flex: 1 0 auto;
+}
+
 .Header {
   padding-top: 12px;
   padding-bottom: 12px;
@@ -17,11 +21,10 @@
 }
 
 .Footer {
-  position: absolute;
   box-sizing: border-box;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  flex-shrink: 0;
+  width: 90%;
+  margin: 0 auto;
   padding: 20px;
   font-size: 12px;
   color: #586069;

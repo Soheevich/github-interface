@@ -5,10 +5,12 @@ import './Layout.css';
 
 const Layout = props => (
   <Fragment>
-    <header className="Header">
-      <Link to="/">Github Interface</Link>
-    </header>
-    {props.children}
+    <div className="Content">
+      <header className="Header">
+        <Link to="/">Github Interface</Link>
+      </header>
+      {props.children}
+    </div>
     <footer className="Footer">
       2018
     </footer>
