@@ -12,3 +12,13 @@
 .IssuesListElement:hover {
   background-color: #eee;
 }
+
+.IssuesListElement:first-of-type {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.IssuesListElement:last-of-type {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}

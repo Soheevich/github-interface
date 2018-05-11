@@ -27,10 +27,17 @@
 }
 
 .PreviousPage {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 .NextPage {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .Disabled {
+  color: #d1d5da;
+  cursor: default;
+  background-color: #fafbfc;
 }
