@@ -78,7 +78,7 @@ const filterReducer = (state = initialState, action) => {
         loading: true
       };
     case actionTypes.FETCH_ISSUES_SUCCESS:
-      console.log('issues', action.issues);
+      // console.log('issues', action.issues);
       return {
         ...state,
         issues: action.issues,
