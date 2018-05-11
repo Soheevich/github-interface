@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
-import dateDifference from '../../helpers/dateDifference';
+import dateDifference from '../../../../helpers/dateDifference';
 import './Issue.css';
 
 const Issue = props => {
