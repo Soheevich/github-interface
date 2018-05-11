@@ -6,9 +6,33 @@ const initialState = {
   issues: null,
   loading: false,
   inputs: {
-    owner: '',
-    repository: '',
-    issuesPerPage: 20
+    owner: {
+      elementType: 'input',
+      elementConfig: {
+        type: 'text',
+        placeholder: 'Owner'
+      },
+      value: '',
+    },
+    repository: {
+      elementType: 'input',
+      elementConfig: {
+        type: 'text',
+        placeholder: 'Repository'
+      },
+      value: '',
+    },
+    issuesPerPage: {
+      elementType: 'select',
+      elementConfig: {
+        options: [
+          { value: 20, displayValue: '20' },
+          { value: 30, displayValue: '30' },
+          { value: 40, displayValue: '40' }
+        ]
+      },
+      value: 20,
+    }
   },
   list: {
     currentPage: 1,
@@ -19,11 +43,17 @@ const initialState = {
 const filterReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SET_INPUTS:
+      // console.log('[reducer set input] input', action.input);
+      const key = Object.keys(action.input)[0];
+
       return {
         ...state,
         inputs: {
           ...state.inputs,
-          ...action.input
+          [key]: {
+            ...state.inputs[key],
+            value: action.input[key].value
+          }
         }
       };
     case actionTypes.FETCH_REPOSITORIES_START:

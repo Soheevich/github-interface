@@ -78,7 +78,7 @@ export const fetchIssues = (owner, repository, page = 1, perPage = 20) => {
         // console.log('fetchIssuesSuccess - action', response);
         let issues = [];
         const { headers: { link: headerLink } } = response;
-        const totalPages = headerLink.match(/\d+(?=&per_page=20>; rel="last")/)[0];
+        const totalPages = headerLink.match(/\d+(?=&per_page=\d+>; rel="last")/)[0];
         const list = {
           currentPage: 1,
           totalPages: parseInt(totalPages, 10)
