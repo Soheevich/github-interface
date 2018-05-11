@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Input from './Input/Input';
 import Issue from '../../components/Issue/Issue';
 import * as actions from '../../store/actions/issuesFinder';
+import Spinner from '../../components/Spinner/Spinner';
 import './IssuesFinder.css';
 
 class IssuesFinder extends Component {
@@ -47,7 +48,9 @@ class IssuesFinder extends Component {
     );
 
     let issues = null;
-    if (this.props.issues) {
+    if (this.props.loading) {
+      issues = <Spinner />
+    } else if (this.props.issues) {
       issues = this.props.issues.map((issue) => {
         // console.log('issue', issue);
         return (
@@ -82,7 +85,8 @@ const mapStateToProps = (state) => {
   return {
     issues: state.issues,
     inputs: state.inputs,
-    list: state.list
+    list: state.list,
+    loading: state.loading
   };
 };
 
