@@ -61,13 +61,20 @@ const filterReducer = (state = initialState, action) => {
         }
       };
     case actionTypes.SET_CURRENT_PAGE:
+      console.log('SET_CURRENT_PAGE', {
+        ...state,
+        list: {
+          ...state.list,
+          currentPage: action.page
+        }
+      });
       return {
         ...state,
         list: {
           ...state.list,
           currentPage: action.page
         }
-      }
+      };
     case actionTypes.FETCH_REPOSITORIES_START:
       return {
         ...state,

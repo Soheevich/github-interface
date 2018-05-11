@@ -26,6 +26,13 @@
   border-color: #eee;
 }
 
+.CurrentPageButton,
+.CurrentPageButton:hover {
+  color: #fff;
+  background-color: #0366d6;
+  border-color: #0366d6;
+}
+
 .PreviousPage {
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;

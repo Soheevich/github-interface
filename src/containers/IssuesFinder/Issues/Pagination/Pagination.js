@@ -8,25 +8,65 @@ class Pagination extends Component {
   pageChangeHandler = (page) => {
     const issuesPerPage = parseInt(this.props.inputs.issuesPerPage.value, 10);
 
-    this.props.onPageNumberChange(page);
-    this.props.onSearchIssues(this.props.inputs.owner.value, this.props.inputs.repository.value, this.props.list.currentPage, issuesPerPage);
+    this.props.onPageNumberChange(this.props.inputs.owner.value, this.props.inputs.repository.value, page, issuesPerPage);
   }
 
-  render() {
-    let previousPageClasses = ['PaginationButton', 'PreviousPage'];
-    let nextPageClasses = ['PaginationButton', 'NextPage'];
-  
+  makePages = () => {
+    console.log('make pages', this.props.list);
+    const { currentPage, totalPages } = this.props.list;
+    let pages = [];
+
+    const previousPageClasses = ['PaginationButton', 'PreviousPage'];
+    const nextPageClasses = ['PaginationButton', 'NextPage'];
+    
     if (this.props.list.currentPage === 1) {
       previousPageClasses.push('Disabled');
     }
     if (this.props.list.currentPage === this.props.list.totalPages) {
       nextPageClasses.push('Disabled');
     }
+    
+    pages.push(<span
+      className={previousPageClasses.join(' ')}
+      key="Previous"
+      onClick={() => this.pageChangeHandler(currentPage - 1)}>
+        Previous
+      </span>);
+    
+    const mainPages = Array.from({ length: totalPages }, (page, index, array) => {
+      const pageNumber = index + 1;
+      const pageClasses = ['PaginationButton'];
+
+      if (pageNumber === currentPage) {
+        pageClasses.push('CurrentPageButton');
+      }
+
+      return (
+        <span
+          className={pageClasses.join(' ')}
+          key={pageNumber}
+          onClick={() => this.pageChangeHandler(pageNumber)}>
+          {pageNumber}
+        </span>
+      );
+    });
+    console.log(mainPages);
   
+    pages = pages.concat(mainPages);
+    pages.push(<span
+      className={nextPageClasses.join(' ')}
+      key="Next"
+      onClick={() => this.pageChangeHandler(currentPage + 1)}>
+        Next
+      </span>);
+
+    return pages;
+  }
+
+  render() {
     return (
       <div className="Pagination">
-        <span className={previousPageClasses.join(' ')}>Previous</span>
-        <span className={nextPageClasses.join(' ')}>Next</span>
+        {this.makePages()}
       </div>
     );
   }
@@ -41,10 +81,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onPageNumberChange: (page) =>
-      dispatch(actions.setCurrentPage(page)),
-    onSearchIssues: (owner, repository, page, numberOfIssues) =>
-      dispatch(actions.fetchIssues(owner, repository, page, numberOfIssues)),
+    onPageNumberChange: (owner, repository, page, numberOfIssues) =>
+      dispatch(actions.setPage(owner, repository, page, numberOfIssues)),
   };
 };
 

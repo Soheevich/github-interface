@@ -18,7 +18,6 @@ class Form extends Component {
 
   render() {
     const buttonActive = this.props.inputs.owner.value && this.props.inputs.repository.value;
-    console.log(buttonActive);
   
     const formElementsArray = [];
     Object.keys(this.props.inputs).forEach((key) => {

@@ -7,11 +7,6 @@ import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 
 
 const IssuesFinder = (props) => {
-
-  // const numberOfPages = this.props.list ?
-  //   <p>page #{this.props.list.currentPage}, total number of pages: {this.props.list.totalPages}</p>:
-  //   null;
-
   return (
     <div className="IssuesMain">
       <Form />
