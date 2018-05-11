@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
+import marked from 'marked';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -9,7 +9,8 @@ const IssueDetails = (props) => {
   const { match: { params: { number } } } = props;
   const issue = props.issues.filter((iss) => iss.number === parseInt(number, 10))[0];
   const { user } = issue;
-  console.log(issue);
+  const text = marked(issue.body);
+  console.log(text);
 
   return (
     <div className="IssuesDetailsMain">
@@ -17,7 +18,7 @@ const IssueDetails = (props) => {
       <div>
         <img width="44" height="44" src={user.userAvatarUrl} alt={`@${user.userLogin}` } />
         <a href={user.userUrl}>{user.userLogin}</a>
-        <ReactMarkdown source={issue.body} />;
+        <article dangerouslySetInnerHTML={{ __html: text }}></article>
       </div>
     </div>
   );
