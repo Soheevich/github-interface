@@ -1,8 +1,10 @@
 import React from 'react';
 
+import './IssuesFinder.css';
 import Form from './Form/Form';
 import Issues from './Issues/Issues';
-import './IssuesFinder.css';
+import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
+
 
 const IssuesFinder = (props) => {
 
@@ -13,7 +15,9 @@ const IssuesFinder = (props) => {
   return (
     <div className="IssuesMain">
       <Form />
-      <Issues />
+      <ErrorBoundary>
+        <Issues />
+      </ErrorBoundary>
       {
         // numberOfPages
       }
