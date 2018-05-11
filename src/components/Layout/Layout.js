@@ -9,6 +9,9 @@ const Layout = props => (
       <Link to="/">Github Interface</Link>
     </header>
     {props.children}
+    <footer className="Footer">
+      2018
+    </footer>
   </Fragment>
 );
 
