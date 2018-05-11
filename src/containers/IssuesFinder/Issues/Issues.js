@@ -16,7 +16,7 @@ const Issues = (props) => {
   } else if (props.error) {
     throw props.error;
   } else if (props.issues) {
-    pagination = <Pagination list={props.list} />;
+    pagination = <Pagination />;
 
     issues = props.issues.map((issue) => {
       // console.log('issue', issue);
@@ -45,7 +45,6 @@ const Issues = (props) => {
 const mapStateToProps = (state) => {
   return {
     issues: state.issues,
-    list: state.list,
     loading: state.loading,
     error: state.error
   };

@@ -9,6 +9,13 @@ export const setInputs = input => {
   };
 };
 
+export const setCurrentPage = page => {
+  return {
+    type: actionTypes.SET_CURRENT_PAGE,
+    page
+  };
+};
+
 export const fetchRepositoriesSuccess = repositories => {
   return {
     type: actionTypes.FETCH_REPOSITORIES_SUCCESS,

@@ -1,0 +1,4 @@
+.IssuesForm input,
+.IssuesForm select {
+  border-radius: 5px;
+}
