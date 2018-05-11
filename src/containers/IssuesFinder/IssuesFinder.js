@@ -18,17 +18,8 @@ const IssuesFinder = (props) => {
       <ErrorBoundary>
         <Issues />
       </ErrorBoundary>
-      {
-        // numberOfPages
-      }
     </div>
   );
-};
-
-const mapStateToProps = (state) => {
-  return {
-    list: state.list,
-  };
 };
 
 export default IssuesFinder;

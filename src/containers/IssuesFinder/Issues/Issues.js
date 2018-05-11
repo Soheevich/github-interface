@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import './Issues.css';
 import Issue from './Issue/Issue';
 import Spinner from '../../../components/Spinner/Spinner';
+import Pagination from './Pagination/Pagination';
+
 
 const Issues = (props) => {
   let issues = null;
+  let pagination = null;
+
   if (props.loading) {
     issues = <Spinner />
   } else if (props.error) {
     throw props.error;
   } else if (props.issues) {
+    pagination = <Pagination list={props.list} />;
+
     issues = props.issues.map((issue) => {
       // console.log('issue', issue);
       return (
@@ -27,15 +33,19 @@ const Issues = (props) => {
   }
 
   return (
-    <ul className="IssuesList">
-      {issues}
-    </ul>
+    <Fragment>
+      <ul className="IssuesList">
+        {issues}
+      </ul>
+      {pagination}
+    </Fragment>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
     issues: state.issues,
+    list: state.list,
     loading: state.loading,
     error: state.error
   };
