@@ -16,14 +16,13 @@ const Input = (props) => {
             {...props.elementConfig}
             value={props.value}
             onChange={(event) => {
-              props.changed(event, props.id);
+              const {target: {value}} = event;
+              console.log(event);
+              console.log(value);
+              props.changed(value, props.id);
               props.repositorySearch(event);
             }}
             onClick={(event) => {
-
-              // console.log(!props.showAutocomplete);
-              // console.log(props.ownerInputIsFilled);
-
               if (!props.showAutocomplete && props.ownerInputIsFilled) {
                 props.toggleAutocomplete();
                 console.log('search');
@@ -37,7 +36,11 @@ const Input = (props) => {
             className="InputElement"
             {...props.elementConfig}
             value={props.value}
-            onChange={(event) => props.changed(event, props.id)} />;
+            onChange={(event) => {
+              const { target: { value } } = event;
+
+              props.changed(value, props.id);
+            }} />;
       }
       break;
     case ('select'):

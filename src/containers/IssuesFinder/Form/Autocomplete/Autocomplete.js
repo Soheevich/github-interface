@@ -7,7 +7,16 @@ const Autocomplete = (props) => {
   if (props.repositories) {
     repos = props.repositories.slice(0, 5).map(repo => {
       return (
-        <div key={repo.id} className="AutocompleteElement">{repo.name}</div>
+        <div
+          key={repo.id}
+          className="AutocompleteElement"
+          onClick={ (event) => {
+            props.toggleAutocomplete()
+            props.changed(repo.name, 'repository');
+            // props.submit(event);
+          }
+          }>{repo.name}
+        </div>
       );
     });
   }

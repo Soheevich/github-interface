@@ -33,8 +33,8 @@ class IssuesFinder extends Component {
     this.props.onSearchRepositories(this.props.inputs.owner.value);
   }
 
-  onInputChangedHandler = (event, inputIdentifier) => {
-    this.props.onInputChange({ [inputIdentifier]: { value: event.target.value } });
+  onInputChangedHandler = (value, inputIdentifier) => {
+    this.props.onInputChange({ [inputIdentifier]: { value } });
   }
 
   componentWillReceiveProps({inputs: {repository: {value}}}) {
