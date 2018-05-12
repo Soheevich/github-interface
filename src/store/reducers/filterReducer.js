@@ -83,11 +83,12 @@ const filterReducer = (state = initialState, action) => {
         error: false
       };
     case actionTypes.FETCH_ISSUES_SUCCESS:
-      // console.log('issues', action.issues);
+      // console.log('issues', action.list);
       return {
         ...state,
         issues: action.issues,
         list: {
+          ...state.list,
           ...action.list,
           currentPage: action.page
         },

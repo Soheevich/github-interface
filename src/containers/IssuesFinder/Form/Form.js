@@ -25,7 +25,8 @@ const Form = (props) => {
             elementType={formElement.config.elementType}
             elementConfig={formElement.config.elementConfig}
             value={formElement.config.value}
-            changed={props.onInputChange} />
+            changed={props.onInputChange}
+            repositorySearch={props.onRepositorySearch} />
         );
       })}
       <button disabled={!buttonActive}>Get issues</button>

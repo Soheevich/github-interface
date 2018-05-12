@@ -18,6 +18,10 @@ class IssuesFinder extends Component {
     this.props.onSearchIssues(this.props.inputs.owner.value, this.props.inputs.repository.value, this.props.list.currentPage, issuesPerPage);
   }
 
+  onSearchRepositoriesHandler = () => {
+    this.props.onSearchRepositories(this.props.inputs.owner.value);
+  }
+
   onInputChangedHandler = (event, inputIdentifier) => {
     this.props.onInputChange({ [inputIdentifier]: { value: event.target.value } });
   }
@@ -43,7 +47,8 @@ class IssuesFinder extends Component {
         <Form 
           inputs={this.props.inputs}
           onSearch={this.onSearchHandler}
-          onInputChange={this.onInputChangedHandler} />
+          onInputChange={this.onInputChangedHandler}
+          onRepositorySearch={this.onSearchRepositoriesHandler} />
         <ErrorBoundary error={this.props.error}>
           <Issues 
             issues={this.props.issues}
@@ -73,6 +78,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actions.fetchIssues(owner, repository, page, numberOfIssues)),
     onInputChange: (object) =>
       dispatch(actions.setInputs(object)),
+    onSearchRepositories: (owner) =>
+      dispatch(actions.fetchRepositories(owner))
   };
 };
 

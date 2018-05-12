@@ -7,13 +7,27 @@ const Input = (props) => {
 
   switch (props.elementType) {
     case ('input'):
-      inputElement =
-        <input
-          id={props.id}
-          className="InputElement"
-          {...props.elementConfig}
-          value={props.value}
-          onChange={(event) => props.changed(event, props.id)} />;
+    // console.log(props);
+      if (props.id === 'repository') {
+        inputElement =
+          <input
+            id={props.id}
+            className="InputElement"
+            {...props.elementConfig}
+            value={props.value}
+            onChange={(event) => {
+              props.changed(event, props.id);
+              // props.repositorySearch();
+            }} />;
+      } else {
+        inputElement =
+          <input
+            id={props.id}
+            className="InputElement"
+            {...props.elementConfig}
+            value={props.value}
+            onChange={(event) => props.changed(event, props.id)} />;
+      }
       break;
     case ('select'):
       inputElement = (

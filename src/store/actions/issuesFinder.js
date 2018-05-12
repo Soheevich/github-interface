@@ -72,6 +72,7 @@ export const fetchIssuesStart = () => {
 
 export const fetchIssues = (owner, repository, page, perPage) => {
   return dispatch => {
+    // console.log(`/repos/${owner}/${repository}/issues?page=${page}&per_page=${perPage}`);
     dispatch(fetchIssuesStart());
     axios
       .get(`/repos/${owner}/${repository}/issues?page=${page}&per_page=${perPage}`)
@@ -79,11 +80,14 @@ export const fetchIssues = (owner, repository, page, perPage) => {
         // console.log('fetchIssuesSuccess - action', response);
         let issues = [];
         const { headers: { link: headerLink } } = response;
-        const totalPages = headerLink.match(/\d+(?=&per_page=\d+>; rel="last")/)[0];
+        const totalPages = headerLink.match(/\d+(?=&per_page=\d+>; rel="last")/);
         const list = {
-          currentPage: 1,
-          totalPages: parseInt(totalPages, 10)
+          currentPage: 1
         };
+
+        if (totalPages) {
+          list.totalPages = parseInt(totalPages, 10);
+        }
 
         response.data.forEach(issue => {
           // console.log('Issues forEach - issue', issue);
@@ -116,7 +120,7 @@ export const fetchIssues = (owner, repository, page, perPage) => {
         dispatch(fetchIssuesSuccess(issues, list, page));
       })
       .catch(error => {
-        // console.log('fetchIssuesFail - action', error);
+        console.log('fetchIssuesFail - action', error);
         dispatch(fetchIssuesFail(error));
       });
   };
