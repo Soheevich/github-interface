@@ -14,18 +14,20 @@ const Form = (props) => {
       config: props.inputs[key]
     });
   });
+  
+  let autocomplete = null;
+  // console.log(props.showAutocomplete);
+  if (props.showAutocomplete) {
+    autocomplete = <Autocomplete
+      repositories={props.repositories}
+      toggleAutocomplete={props.onToggleAutocomplete} />;
+  }
+
+  // console.log(props.inputs.owner);
 
   return (
     <form onSubmit={(event) => props.onSearch(event)} className="IssuesForm">
       {formElementsArray.map((formElement) => {
-        let autocomplete = null;
-
-        if (props.showAutocomplete && props.inputs.repository.value) {
-          autocomplete = <Autocomplete
-            repositories={props.repositories}
-            toggleAutocomplete={props.onToggleAutocomplete} />;
-        }
-
         return (
           <Fragment key={formElement.id}>
             <Input
@@ -35,13 +37,14 @@ const Form = (props) => {
               elementConfig={formElement.config.elementConfig}
               value={formElement.config.value}
               showAutocomplete={props.showAutocomplete}
+              ownerInputIsFilled={!!props.inputs.owner.value}
               toggleAutocomplete={props.onToggleAutocomplete}
               changed={props.onInputChange}
               repositorySearch={props.onRepositorySearch} />
-            { autocomplete }
-          </Fragment>
-        );
-      })}
+              </Fragment>
+            );
+          })}
+      { autocomplete }
       <button disabled={!buttonActive}>Get issues</button>
     </form>
   );

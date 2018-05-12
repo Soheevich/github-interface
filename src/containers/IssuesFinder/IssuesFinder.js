@@ -21,10 +21,6 @@ class IssuesFinder extends Component {
     }));
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log('componentDidUpdate', prevState);
-  }
-
   onSearchHandler = (event) => {
     event.preventDefault();
     const issuesPerPage = parseInt(this.props.inputs.issuesPerPage.value, 10);
