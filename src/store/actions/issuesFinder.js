@@ -10,6 +10,7 @@ export const setInputs = input => {
 };
 
 export const fetchRepositoriesSuccess = repositories => {
+  console.log('repositories fetched', repositories);
   return {
     type: actionTypes.FETCH_REPOSITORIES_SUCCESS,
     repositories
@@ -29,20 +30,31 @@ export const fetchRepositoriesStart = () => {
   };
 };
 
-export const fetchRepositories = owner => {
+export const fetchRepositories = (owner, repo) => {
+  const repository = repo ? repo + '+' : null;
+  const url = repository ?
+    `https://api.github.com/search/repositories?q=${repository}user:${owner}` :
+    `users/${owner}/repos`;
+
+  console.log('repo', repo);
+  console.log('url', url);
+
   return dispatch => {
     dispatch(fetchRepositoriesStart());
     axios
-      .get(`users/${owner}/repos`)
+      .get(url)
       .then(response => {
-        let repos = [];
-        Object.keys(response).forEach(repo => {
+        console.log('repositories fetch', response);
+        const array = repo ? response.data.items : response.data
+        const repos = [];
+        array.forEach(repo => {
           const { id, name } = repo;
           repos.push({ id, name });
         });
         dispatch(fetchRepositoriesSuccess(repos));
       })
       .catch(error => {
+        console.log('error', error);
         dispatch(fetchRepositoriesFail(error));
       });
   };

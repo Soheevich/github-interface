@@ -15,10 +15,8 @@ const Input = (props) => {
             className="InputElement"
             {...props.elementConfig}
             value={props.value}
-            onChange={(event) => {
-              props.changed(event, props.id);
-              // props.repositorySearch();
-            }} />;
+            onChange={(event) => {props.changed(event, props.id)}}
+            onClick={(event) => {props.repositorySearch(event)}} />;
       } else {
         inputElement =
           <input

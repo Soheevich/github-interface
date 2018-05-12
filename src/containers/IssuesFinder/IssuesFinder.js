@@ -26,6 +26,13 @@ class IssuesFinder extends Component {
     this.props.onInputChange({ [inputIdentifier]: { value: event.target.value } });
   }
 
+  componentWillReceiveProps({inputs: {repository: {value}}}) {
+    if (value && value !== this.props.inputs.repository.value) {
+      console.log('nextProps', value);
+      this.props.onSearchRepositories(this.props.inputs.owner.value, value);
+    }
+  }
+
   onChangePageHandler = (page) => {
     const issuesPerPage = parseInt(this.props.inputs.issuesPerPage.value, 10);
 
@@ -78,8 +85,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actions.fetchIssues(owner, repository, page, numberOfIssues)),
     onInputChange: (object) =>
       dispatch(actions.setInputs(object)),
-    onSearchRepositories: (owner) =>
-      dispatch(actions.fetchRepositories(owner))
+    onSearchRepositories: (owner, repository) =>
+      dispatch(actions.fetchRepositories(owner, repository))
   };
 };
 

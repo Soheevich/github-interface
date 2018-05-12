@@ -63,18 +63,16 @@ const filterReducer = (state = initialState, action) => {
     case actionTypes.FETCH_REPOSITORIES_START:
       return {
         ...state,
-        loading: true
       };
     case actionTypes.FETCH_REPOSITORIES_SUCCESS:
       return {
         ...state,
         repositories: action.repositories,
-        loading: false
       };
     case actionTypes.FETCH_REPOSITORIES_FAIL:
       return {
         ...state,
-        loading: false
+        error: action.error
       };
     case actionTypes.FETCH_ISSUES_START:
       return {
