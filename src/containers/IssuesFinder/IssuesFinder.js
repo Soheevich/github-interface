@@ -28,7 +28,7 @@ class IssuesFinder extends Component {
 
   componentWillReceiveProps({inputs: {repository: {value}}}) {
     if (value && value !== this.props.inputs.repository.value) {
-      console.log('nextProps', value);
+      // console.log('nextProps', value);
       this.props.onSearchRepositories(this.props.inputs.owner.value, value);
     }
   }

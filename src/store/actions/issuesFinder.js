@@ -10,7 +10,7 @@ export const setInputs = input => {
 };
 
 export const fetchRepositoriesSuccess = repositories => {
-  console.log('repositories fetched', repositories);
+  // console.log('repositories fetched', repositories);
   return {
     type: actionTypes.FETCH_REPOSITORIES_SUCCESS,
     repositories
@@ -36,15 +36,12 @@ export const fetchRepositories = (owner, repo) => {
     `https://api.github.com/search/repositories?q=${repository}user:${owner}` :
     `users/${owner}/repos`;
 
-  console.log('repo', repo);
-  console.log('url', url);
-
   return dispatch => {
     dispatch(fetchRepositoriesStart());
     axios
       .get(url)
       .then(response => {
-        console.log('repositories fetch', response);
+        // console.log('repositories fetch', response);
         const array = repo ? response.data.items : response.data
         const repos = [];
         array.forEach(repo => {
