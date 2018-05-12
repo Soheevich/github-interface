@@ -16,7 +16,13 @@ const Input = (props) => {
             {...props.elementConfig}
             value={props.value}
             onChange={(event) => {props.changed(event, props.id)}}
-            onClick={(event) => {props.repositorySearch(event)}} />;
+            onClick={(event) => {
+              props.repositorySearch(event);
+
+              if (!props.showAutocomplete) {
+                props.toggleAutocomplete();
+              }
+            }} />;
       } else {
         inputElement =
           <input

@@ -10,6 +10,21 @@ import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 
 
 class IssuesFinder extends Component {
+  state = {
+    showAutocomplete: false
+  }
+
+  onToggleAutocomplete = () => {
+    console.log('onToggleAutocomplete');
+    this.setState(prevState => ({
+      showAutocomplete: !prevState.showAutocomplete
+    }));
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('componentDidUpdate', prevState);
+  }
+
   onSearchHandler = (event) => {
     event.preventDefault();
     const issuesPerPage = parseInt(this.props.inputs.issuesPerPage.value, 10);
@@ -53,6 +68,9 @@ class IssuesFinder extends Component {
       <div className="IssuesMain">
         <Form 
           inputs={this.props.inputs}
+          repositories={this.props.repositories}
+          showAutocomplete={this.state.showAutocomplete}
+          onToggleAutocomplete={this.onToggleAutocomplete}
           onSearch={this.onSearchHandler}
           onInputChange={this.onInputChangedHandler}
           onRepositorySearch={this.onSearchRepositoriesHandler} />
@@ -73,6 +91,7 @@ const mapStateToProps = (state) => {
   return {
     inputs: state.inputs,
     list: state.list,
+    repositories: state.repositories,
     issues: state.issues,
     loading: state.loading,
     error: state.error
