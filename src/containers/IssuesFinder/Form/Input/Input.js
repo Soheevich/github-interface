@@ -48,7 +48,10 @@ const Input = (props) => {
           className="InputElement"
           {...props.elementConfig}
           value={props.value}
-          onChange={(event) => props.changed(event, props.id)}>
+          onChange={(event) => {
+            const { target: { value } } = event;
+            props.changed(value, props.id);
+          }}>
           {props.elementConfig.options.map(option => (
             <option key={option.value} value={option.value}>
               {option.displayValue}

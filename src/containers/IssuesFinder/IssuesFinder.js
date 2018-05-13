@@ -57,6 +57,12 @@ class IssuesFinder extends Component {
     this.props.onSearchIssues(this.props.inputs.owner.value, this.props.inputs.repository.value, page, issuesPerPage);
   }
 
+  onAutocompleteClickHandler = (repository) => {
+    const issuesPerPage = parseInt(this.props.inputs.issuesPerPage.value, 10);
+    this.props.onAutocompleteSearch(repository, this.props.inputs.owner.value, 1, issuesPerPage);
+    this.onToggleAutocomplete();
+  }
+
   render() {
     let pagination = null;
 
@@ -75,7 +81,8 @@ class IssuesFinder extends Component {
           onToggleAutocomplete={this.onToggleAutocomplete}
           onSearch={this.onSearchHandler}
           onInputChange={this.onInputChangedHandler}
-          onRepositorySearch={this.onSearchRepositoriesHandler} />
+          onRepositorySearch={this.onSearchRepositoriesHandler}
+          onAutocompleteClick={this.onAutocompleteClickHandler} />
         <ErrorBoundary error={this.props.error}>
           <Issues 
             issues={this.props.issues}
@@ -107,7 +114,9 @@ const mapDispatchToProps = (dispatch) => {
     onInputChange: (object) =>
       dispatch(actions.setInputs(object)),
     onSearchRepositories: (owner, repository) =>
-      dispatch(actions.fetchRepositories(owner, repository))
+      dispatch(actions.fetchRepositories(owner, repository)),
+    onAutocompleteSearch: (repo, owner, page, perPage) => 
+      dispatch(actions.selectAutocomplete(repo, owner, page, perPage))
   };
 };
 

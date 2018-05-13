@@ -122,3 +122,14 @@ export const fetchIssues = (owner, repository, page, perPage) => {
       });
   };
 };
+
+export const selectAutocomplete = (repo, owner, page, perPage) => {
+  console.log('repo', repo);
+  console.log('owner', owner);
+  console.log('page', page);
+  console.log('perPage', perPage);
+  return dispatch => {
+    dispatch(setInputs({ repository: { value: repo } }));
+    dispatch(fetchIssues(owner, repo, page, perPage));
+  };
+};

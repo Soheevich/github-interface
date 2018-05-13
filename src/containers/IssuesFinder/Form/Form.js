@@ -21,8 +21,7 @@ const Form = (props) => {
     autocomplete = <Autocomplete
       repositories={props.repositories}
       toggleAutocomplete={props.onToggleAutocomplete}
-      changed={props.onInputChange}
-      submit={props.onSearch} />;
+      autocompleteClick={props.onAutocompleteClick} />;
   }
 
   // console.log(props.inputs.owner);

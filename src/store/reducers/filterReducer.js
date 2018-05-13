@@ -47,7 +47,7 @@ const initialState = {
 const filterReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SET_INPUTS:
-      // console.log('[reducer set input] input', action.input);
+      console.log('[reducer set input] input', action.input);
       const key = Object.keys(action.input)[0];
 
       return {

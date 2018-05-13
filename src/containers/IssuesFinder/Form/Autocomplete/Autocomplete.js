@@ -10,11 +10,7 @@ const Autocomplete = (props) => {
         <div
           key={repo.id}
           className="AutocompleteElement"
-          onClick={ (event) => {
-            props.toggleAutocomplete()
-            props.changed(repo.name, 'repository');
-            // props.submit(event, repo.name);
-          }
+          onClick={ () => { props.autocompleteClick(repo.name) }
           }>{repo.name}
         </div>
       );
