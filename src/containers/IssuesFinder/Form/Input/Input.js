@@ -17,8 +17,7 @@ const Input = (props) => {
             value={props.value}
             onChange={(event) => {
               const {target: {value}} = event;
-              console.log(event);
-              console.log(value);
+
               props.changed(value, props.id);
               props.repositorySearch(event);
             }}
@@ -38,7 +37,6 @@ const Input = (props) => {
             value={props.value}
             onChange={(event) => {
               const { target: { value } } = event;
-
               props.changed(value, props.id);
             }} />;
       }

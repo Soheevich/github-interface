@@ -2,12 +2,10 @@ import * as actionTypes from './actionTypes';
 import axios from '../../axios-orders';
 
 
-export const setInputs = input => {
-  return {
-    type: actionTypes.SET_INPUTS,
-    input
-  };
-};
+export const setInputs = input => ({
+  type: actionTypes.SET_INPUTS,
+  input
+});
 
 export const fetchRepositoriesSuccess = repositories => {
   // console.log('repositories fetched', repositories);
@@ -17,18 +15,14 @@ export const fetchRepositoriesSuccess = repositories => {
   };
 };
 
-export const fetchRepositoriesFail = error => {
-  return {
-    type: actionTypes.FETCH_REPOSITORIES_FAIL,
-    error
-  };
-};
+export const fetchRepositoriesFail = error => ({
+  type: actionTypes.FETCH_REPOSITORIES_FAIL,
+  error
+});
 
-export const fetchRepositoriesStart = () => {
-  return {
-    type: actionTypes.FETCH_REPOSITORIES_START
-  };
-};
+export const fetchRepositoriesStart = () => ({
+  type: actionTypes.FETCH_REPOSITORIES_START
+});
 
 export const fetchRepositories = (owner, repo) => {
   const repository = repo ? repo + '+' : null;
@@ -57,31 +51,25 @@ export const fetchRepositories = (owner, repo) => {
   };
 };
 
-export const fetchIssuesSuccess = (issues, list, page) => {
-  return {
-    type: actionTypes.FETCH_ISSUES_SUCCESS,
-    issues,
-    list,
-    page
-  };
-};
+export const fetchIssuesSuccess = (issues, list, page) => ({
+  type: actionTypes.FETCH_ISSUES_SUCCESS,
+  issues,
+  list,
+  page
+});
 
-export const fetchIssuesFail = error => {
-  return {
-    type: actionTypes.FETCH_ISSUES_FAIL,
-    error
-  };
-};
+export const fetchIssuesFail = error => ({
+  type: actionTypes.FETCH_ISSUES_FAIL,
+  error
+});
 
-export const fetchIssuesStart = () => {
-  return {
-    type: actionTypes.FETCH_ISSUES_START
-  };
-};
+export const fetchIssuesStart = () => ({
+  type: actionTypes.FETCH_ISSUES_START
+});
 
 export const fetchIssues = (owner, repository, page, perPage) => {
   return dispatch => {
-    // console.log(`/repos/${owner}/${repository}/issues?page=${page}&per_page=${perPage}`);
+    console.log(`/repos/${owner}/${repository}/issues?page=${page}&per_page=${perPage}`);
     dispatch(fetchIssuesStart());
     axios
       .get(`/repos/${owner}/${repository}/issues?page=${page}&per_page=${perPage}`)

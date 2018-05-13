@@ -14,6 +14,19 @@ class IssuesFinder extends Component {
     showAutocomplete: false
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.inputs.repository !== this.props.inputs.repository && prevState.showAutocomplete !== this.state.showAutocomplete) {
+      this.onSearchHandler();
+    }
+  }
+
+  componentWillReceiveProps({ inputs: { repository: { value } } }) {
+    if (value && value !== this.props.inputs.repository.value) {
+      // console.log('nextProps', value);
+      this.props.onSearchRepositories(this.props.inputs.owner.value, value);
+    }
+  }
+
   onToggleAutocomplete = () => {
     console.log('onToggleAutocomplete');
     this.setState(prevState => ({
@@ -22,7 +35,7 @@ class IssuesFinder extends Component {
   }
 
   onSearchHandler = (event) => {
-    event.preventDefault();
+    if (event) event.preventDefault();
     const issuesPerPage = parseInt(this.props.inputs.issuesPerPage.value, 10);
 
     // this method takes current page from the store
@@ -30,18 +43,11 @@ class IssuesFinder extends Component {
   }
 
   onSearchRepositoriesHandler = () => {
-    this.props.onSearchRepositories(this.props.inputs.owner.value);
+    this.props.onSearchRepositories(this.props.inputs.owner.value, this.props.inputs.repository.value);
   }
 
   onInputChangedHandler = (value, inputIdentifier) => {
     this.props.onInputChange({ [inputIdentifier]: { value } });
-  }
-
-  componentWillReceiveProps({inputs: {repository: {value}}}) {
-    if (value && value !== this.props.inputs.repository.value) {
-      // console.log('nextProps', value);
-      this.props.onSearchRepositories(this.props.inputs.owner.value, value);
-    }
   }
 
   onChangePageHandler = (page) => {

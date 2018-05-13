@@ -13,7 +13,7 @@ const Autocomplete = (props) => {
           onClick={ (event) => {
             props.toggleAutocomplete()
             props.changed(repo.name, 'repository');
-            // props.submit(event);
+            // props.submit(event, repo.name);
           }
           }>{repo.name}
         </div>
