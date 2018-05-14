@@ -13,11 +13,13 @@ const IssueDetails = (props) => {
 
   return (
     <div className="IssuesDetailsMain">
-      <article>
+      <article className="IssueDetailsContainer">
         <h3>{issue.title}</h3>
-        <img width="44" height="44" src={user.userAvatarUrl} alt={`@${user.userLogin}` } />
-        <a href={user.userUrl}>{user.userLogin}</a>
-        <section dangerouslySetInnerHTML={{ __html: text }}></section>
+        <div className="IssueDetailsAuthor">
+          <img width="44" height="44" src={user.userAvatarUrl} alt={`@${user.userLogin}` } />
+          <a href={user.userUrl} className="AuthorLink">{user.userLogin}</a>
+        </div>
+        <section dangerouslySetInnerHTML={{ __html: text }} className="CommentBody"></section>
       </article>
     </div>
   );
