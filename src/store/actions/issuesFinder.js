@@ -7,13 +7,10 @@ export const setInputs = input => ({
   input
 });
 
-export const fetchRepositoriesSuccess = repositories => {
-  // console.log('repositories fetched', repositories);
-  return {
-    type: actionTypes.FETCH_REPOSITORIES_SUCCESS,
-    repositories
-  };
-};
+export const fetchRepositoriesSuccess = repositories => ({
+  type: actionTypes.FETCH_REPOSITORIES_SUCCESS,
+  repositories
+});
 
 export const fetchRepositoriesFail = error => ({
   type: actionTypes.FETCH_REPOSITORIES_FAIL,
