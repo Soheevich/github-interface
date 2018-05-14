@@ -24,7 +24,7 @@ const Input = (props) => {
             onClick={(event) => {
               if (!props.showAutocomplete && props.ownerInputIsFilled) {
                 props.toggleAutocomplete();
-                console.log('search');
+                // console.log('search');
                 props.repositorySearch(event);
               }
             }} />;

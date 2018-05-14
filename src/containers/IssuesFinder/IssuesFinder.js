@@ -28,7 +28,7 @@ class IssuesFinder extends Component {
   }
 
   onToggleAutocomplete = () => {
-    console.log('onToggleAutocomplete');
+    // console.log('onToggleAutocomplete');
     this.setState(prevState => ({
       showAutocomplete: !prevState.showAutocomplete
     }));
